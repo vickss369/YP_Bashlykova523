@@ -35,8 +35,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -55,6 +64,57 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Application.cs">
+      <DependentUpon>ModelYP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ApplicationPurpose.cs">
+      <DependentUpon>ModelYP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ApplicationStatus.cs">
+      <DependentUpon>ModelYP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Book.cs">
+      <DependentUpon>ModelYP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BookGenre.cs">
+      <DependentUpon>ModelYP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Complaint.cs">
+      <DependentUpon>ModelYP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ComplaintStatus.cs">
+      <DependentUpon>ModelYP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Genre.cs">
+      <DependentUpon>ModelYP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelYP.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelYP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReadingList.cs">
+      <DependentUpon>ModelYP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Review.cs">
+      <DependentUpon>ModelYP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Role.cs">
+      <DependentUpon>ModelYP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Section.cs">
+      <DependentUpon>ModelYP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagrams.cs">
+      <DependentUpon>ModelYP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="User.cs">
+      <DependentUpon>ModelYP.tt</DependentUpon>
+    </Compile>
+    <Page Include="Dictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -63,12 +123,121 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Classes\Core.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pages\accountPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\adminEditWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\adminPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\applicationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\authorEditWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\authorPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\bookCatalogPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\chosenBookPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\complaintWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\enterPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\readingBookPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\readingListPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\reviewWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ModelYP.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelYP.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelYP.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelYP.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\accountPage.xaml.cs">
+      <DependentUpon>accountPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\adminEditWindow.xaml.cs">
+      <DependentUpon>adminEditWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\adminPage.xaml.cs">
+      <DependentUpon>adminPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\applicationWindow.xaml.cs">
+      <DependentUpon>applicationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\authorEditWindow.xaml.cs">
+      <DependentUpon>authorEditWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\authorPage.xaml.cs">
+      <DependentUpon>authorPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\bookCatalogPage.xaml.cs">
+      <DependentUpon>bookCatalogPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\chosenBookPage.xaml.cs">
+      <DependentUpon>chosenBookPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\complaintWindow.xaml.cs">
+      <DependentUpon>complaintWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\enterPage.xaml.cs">
+      <DependentUpon>enterPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\readingBookPage.xaml.cs">
+      <DependentUpon>readingBookPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\readingListPage.xaml.cs">
+      <DependentUpon>readingListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\reviewWindow.xaml.cs">
+      <DependentUpon>reviewWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -86,6 +255,14 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EntityDeploy Include="ModelYP.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ModelYP.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="ModelYP.edmx.diagram">
+      <DependentUpon>ModelYP.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -93,6 +270,28 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\loupa.png" />
+    <Resource Include="Images\catalog.png" />
+    <Resource Include="Images\userProfile.png" />
+    <Resource Include="Images\authorProfile.png" />
+    <Resource Include="Images\logoIzba.png" />
+    <Resource Include="Images\lists.png" />
+    <Resource Include="Images\admin.png" />
+    <Content Include="ModelYP.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ModelYP.Context.cs</LastGenOutput>
+      <DependentUpon>ModelYP.edmx</DependentUpon>
+    </Content>
+    <Content Include="ModelYP.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelYP.edmx</DependentUpon>
+      <LastGenOutput>ModelYP.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
