@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using YP_Bashlykova523.Classes;
 
 namespace YP_Bashlykova523.Pages
 {
@@ -23,6 +24,46 @@ namespace YP_Bashlykova523.Pages
         public accountPage()
         {
             InitializeComponent();
+            LoadData();
+        }
+
+        private void LoadData()
+        {
+            if (User.currentUser == null) return;
+
+            var user = User.currentUser;
+
+            userFullNameTB.Text = user.FullName;
+            loginTB.Text = user.Login;
+            emailTB.Text = user.Email;
+
+            if (user.RoleID == 1) roleTB.Text = "Читатель";
+            else if (user.RoleID == 2) roleTB.Text = "Автор";
+            else roleTB.Text = "Администратор";
+
+            reviewsList.ItemsSource = Core.Context.Review.Where(r => r.UserID == user.ID).ToList();
+
+            freezePanel.Visibility = user.IsFreeze ? Visibility.Visible : Visibility.Collapsed;
+
+            if (user.RoleID == 1)
+                toBeAuthorPanel.Visibility = Visibility.Visible;
+            else
+                toBeAuthorPanel.Visibility = Visibility.Collapsed;
+        }
+
+        private void backBtn_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.GoBack();
+        }
+
+        private void applicationBtn_Click(object sender, RoutedEventArgs e)
+        {
+            new applicationWindow("Разморозка аккаунта").ShowDialog();
+        }
+
+        private void applicationAuthorBtn_Click(object sender, RoutedEventArgs e)
+        {
+            new applicationWindow("Становление автором").ShowDialog();
         }
     }
 }

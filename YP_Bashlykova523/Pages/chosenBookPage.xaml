@@ -5,10 +5,89 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:YP_Bashlykova523.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      Background="#D2E2EC"
+      d:DesignHeight="800" d:DesignWidth="800"
       Title="chosenBookPage">
 
     <Grid>
-        
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <Border Margin="20" Padding="20" BorderBrush="#3A2119" BorderThickness="2" CornerRadius="12" Background="#D9CBC2">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0" Margin="0,0,0,20">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Border Background="#C4A39C" BorderBrush="#3A2119" BorderThickness="2" CornerRadius="8" Padding="5">
+                            <Image Source="{Binding ImagePath}" Width="260" Height="360" Stretch="UniformToFill"/>
+                        </Border>
+
+                        <StackPanel Grid.Column="1" Margin="20,0,0,0">
+                            <TextBlock Text="{Binding Title}" FontSize="22" FontWeight="Bold"/>
+                            <TextBlock Text="{Binding Annotation}" TextWrapping="Wrap" Margin="0,10,0,10"/>
+
+                            <TextBlock Text="{Binding User.FullName}" Foreground="#3A2119"/>
+                            <TextBlock x:Name="genresTB" Text="{Binding Genre.Name, StringFormat=Жанр: {0}}" Foreground="#3A2119" Margin="0,5,0,0"/>
+                            <TextBlock x:Name="ratingTB" Text="{Binding Rating, StringFormat=Рейтинг: {0}/10}" FontWeight="Bold" Margin="0,10,0,15"/>
+
+                            <Button x:Name="readBookBtn" Content="Читать книгу" Background="#9CB97E" BorderBrush="#3A2119" Height="40" Margin="0,0,0,30" Click="readBookBtn_Click"/>
+
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                                <ComboBox x:Name="sectionCB" Width="200" DisplayMemberPath="Name" Margin="0,0,20,0"/>
+                                <Button x:Name="addToListBtn" Content="В рид-лист" Background="#9C7C8C" BorderBrush="#3A2119" Click="addToListBtn_Click"/>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal">
+                                <Button x:Name="complaintBookBtn" Content="Жалоба на книгу" Width="140" Background="#D2685B" BorderBrush="#3A2119" Margin="0,0,10,0" Click="complaintBookBtn_Click"/>
+                                <Button x:Name="complaintAuthorBtn" Content="Жалоба на автора" Width="140" Background="#D2685B" BorderBrush="#3A2119" Click="complaintAuthorBtn_Click"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+
+                    <Border Grid.Row="1" Padding="15" BorderBrush="#3A2119" BorderThickness="2" CornerRadius="10" Background="#E6CCC7">
+                        <StackPanel>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Text="ОТЗЫВЫ" Style="{StaticResource HeaderText}" Margin="20,15,0,0"/>
+                                <Button x:Name="addReviewBtn" Grid.Column="1" Content="Написать отзыв" Background="#8BA2C1" BorderBrush="#3A2119" Width="140" Click="addReviewBtn_Click"/>
+                            </Grid>
+
+                            <ListBox x:Name="reviewsList" Height="300" Margin="0,10,0,0" BorderThickness="0" Background="Transparent" HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" d:ItemsSource="{d:SampleData ItemCount=5}">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border Margin="8" Padding="10" BorderBrush="#3A2119" BorderThickness="1" CornerRadius="8" Background="#EBCDB7">
+                                            <StackPanel Margin="8,0,0,6">
+                                                <Grid Margin="0,0,0,6">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                    </Grid.ColumnDefinitions>
+
+                                                    <TextBlock Text="{Binding User.FullName}" FontSize="18" FontWeight="Bold" VerticalAlignment="Center"/>
+                                                    <Button x:Name="complaintReviewBtn" Grid.Column="1" Content="Пожаловаться" Background="#D2685B" Width="110" Height="35" VerticalAlignment="Top" Margin="10,10,10,0" Click="complaintReviewBtn_Click"/>
+                                                </Grid>
+
+                                                <TextBlock Text="{Binding Rating, StringFormat=Оценка: {0}/10}" Margin="0,0,0,5"/>
+                                                <TextBlock Text="{Binding Comment}" FontSize="15" TextWrapping="Wrap"/>
+                                            </StackPanel>
+                                        </Border>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </Border>
+        </ScrollViewer>
     </Grid>
 </Page>

@@ -5,10 +5,87 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:YP_Bashlykova523.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      Background="#D2E2EC"
+      d:DesignHeight="800" d:DesignWidth="800"
       Title="bookCatalogPage">
 
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Margin="10,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0" Margin="10">
+                <TextBlock Text="Поиск" FontSize="17"/>
+                <TextBox x:Name="searchTB" Height="36" FontSize="16" TextChanged="searchTB_TextChanged"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Margin="10">
+                <TextBlock Text="Жанр" FontSize="17"/>
+                <ComboBox x:Name="genreCB" DisplayMemberPath="Name" SelectionChanged="genreCB_SelectionChanged"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="2" Margin="10">
+                <TextBlock Text="По названию" FontSize="17"/>
+                <ComboBox x:Name="titleCB" SelectionChanged="titleCB_SelectionChanged">
+                    <ComboBoxItem Content="Без сортировки"/>
+                    <ComboBoxItem Content="Название (А-Я)"/>
+                    <ComboBoxItem Content="Название (Я-А)"/>
+                </ComboBox>
+            </StackPanel>
+
+            <StackPanel Grid.Column="3" Margin="10">
+                <TextBlock Text="По рейтингу" FontSize="17"/>
+                <ComboBox x:Name="ratingCB" SelectionChanged="ratingCB_SelectionChanged">
+                    <ComboBoxItem Content="Без сортировки"/>
+                    <ComboBoxItem Content="Рейтинг ↑"/>
+                    <ComboBoxItem Content="Рейтинг ↓"/>
+                </ComboBox>
+            </StackPanel>
+        </Grid>
+
+        <ListBox x:Name="booksList" Grid.Row="1" BorderThickness="0" Background="#D2E2EC" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalContentAlignment="Stretch" d:ItemsSource="{d:SampleData ItemCount=5}">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel IsItemsHost="True"/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border Width="280" Height="470" Margin="12" Padding="12" CornerRadius="12" Background="#f5d4bd" BorderBrush="#3A2119" BorderThickness="1">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="12" ShadowDepth="3" Opacity="0.2"/>
+                        </Border.Effect>
+
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="300"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Image Source="{Binding ImagePath}" Width="260" Height="300" Stretch="UniformToFill"/>
+                            <StackPanel Grid.Row="1">
+                                <TextBlock Text="{Binding Title}" FontSize="18" FontWeight="Bold" TextWrapping="Wrap" Margin="6,10,0,0"/>
+                                <TextBlock Text="{Binding User.FullName}" Margin="6,2,0,0"/>
+                            </StackPanel>
+
+                            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
+                                <Button Content="Подробнее" Background="#e3b27d" Click="toBookDetailBtn_Click"/>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </Page>

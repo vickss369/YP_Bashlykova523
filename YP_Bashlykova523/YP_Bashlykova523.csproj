@@ -272,13 +272,12 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\loupa.png" />
-    <Resource Include="Images\catalog.png" />
-    <Resource Include="Images\userProfile.png" />
-    <Resource Include="Images\authorProfile.png" />
     <Resource Include="Images\logoIzba.png" />
-    <Resource Include="Images\lists.png" />
     <Resource Include="Images\admin.png" />
+    <Resource Include="Images\authorProfile.png" />
+    <Resource Include="Images\lists.png" />
+    <Resource Include="Images\bookCatalog.png" />
+    <Resource Include="Images\userProfile.png" />
     <Content Include="ModelYP.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ModelYP.Context.cs</LastGenOutput>

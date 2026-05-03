@@ -23,7 +23,50 @@ namespace YP_Bashlykova523.Pages
         public MainPage()
         {
             InitializeComponent();
+            DataContext = User.currentUser;
+
+            UpdateUI();
             ContentFrame.Navigate(new bookCatalogPage());
+        }
+
+        //тут мне ещё надо решить, какие роли что могут
+        // * может ли админ и автор читать и иметь рид-листы
+        // * все имеют доступ к профилю или только пользователь
+        // * автор и админ - те же читатели с тем же функционалом, только плюс доп возможности?
+        private void UpdateUI()
+        {
+            adminBtn.Visibility = Visibility.Collapsed;
+            authorBtn.Visibility = Visibility.Collapsed;
+            profileBtn.Visibility = Visibility.Collapsed;
+
+            logoutBtn.Visibility = Visibility.Collapsed;
+            entrBtn.Visibility = Visibility.Visible;
+
+            freezePanel.Visibility = Visibility.Collapsed;
+
+            if (User.currentUser == null) return;
+
+            entrBtn.Visibility = Visibility.Collapsed;
+            logoutBtn.Visibility = Visibility.Visible;
+            profileBtn.Visibility = Visibility.Visible;
+
+            if (User.currentUser.RoleID == 1) 
+            {
+                bookListsBtn.Visibility = Visibility.Visible;
+            }
+            else if (User.currentUser.RoleID == 2)
+            {
+                authorBtn.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                adminBtn.Visibility = Visibility.Visible;
+            }
+
+            if (User.currentUser.IsFreeze)
+            {
+                freezePanel.Visibility = Visibility.Visible;
+            }
         }
 
         private void bookCatalogBtn_Click(object sender, RoutedEventArgs e)
@@ -48,7 +91,27 @@ namespace YP_Bashlykova523.Pages
 
         private void profileBtn_Click(object sender, RoutedEventArgs e)
         {
-            ContentFrame.Navigate(new accountPage());
+            //ContentFrame.Navigate(new accountPage());
+
+            NavigationService.Navigate(new accountPage());
+        }
+
+        private void entrBtn_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new enterPage());
+        }
+
+        private void logoutBtn_Click(object sender, RoutedEventArgs e)
+        {
+            User.currentUser = null;
+
+            UpdateUI();
+            ContentFrame.Navigate(new bookCatalogPage());
+        }
+
+        private void applicationBtn_Click(object sender, RoutedEventArgs e)
+        {
+            new applicationWindow("Разморозка аккаунта").ShowDialog();
         }
     }
 }

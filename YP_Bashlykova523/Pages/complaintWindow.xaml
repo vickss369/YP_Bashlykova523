@@ -5,8 +5,42 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:YP_Bashlykova523.Pages"
         mc:Ignorable="d"
-        Title="complaintWindow" Height="450" Width="800">
+        Background="#D2E2EC"
+        Title="Написать жалобу" MinHeight="500" MinWidth="650"
+        Height="500" Width="750">
+
     <Grid>
-        
+        <Border BorderBrush="#3A2119" BorderThickness="2" CornerRadius="10" Background="#D9CBC2" HorizontalAlignment="Stretch" VerticalAlignment="Center" MaxWidth="600" MaxHeight="400">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="70"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock x:Name="complaintTitleTBl" Text="Жалоба на" Style="{StaticResource HeaderText}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,30,0,0" Grid.Row="0"/>
+
+                <StackPanel Grid.Row="1" Orientation="Vertical" Margin="30">
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,15">
+                        <TextBlock Text="Пользователь:" FontSize="17" FontWeight="Bold"/>
+                        <TextBlock x:Name="userFullNameTBl" Text="user" Margin="10,1,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,25">
+                        <TextBlock x:Name="complaintTBl" Text="На что жалоба:" FontSize="17" FontWeight="Bold"/>
+                        <TextBlock x:Name="complaintObjectTBl" Text="название" Margin="10,1,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
+                        <TextBlock Text="Причина:" FontSize="17" FontWeight="Bold"/>
+                        <TextBlock Text="до 300 симв." FontSize="11" Margin="10,0,0,0" VerticalAlignment="Top"/>
+                    </StackPanel>
+
+                    <TextBox x:Name="complaintReasonTB" Height="50" MaxHeight="90" TextWrapping="Wrap" AcceptsReturn="True"/>
+                </StackPanel>
+
+                <Button x:Name="sendComplaintBtn" Grid.Row="2" Content="Отправить жалобу" Height="45" Background="#C57B72" Margin="0,0,0,25" Click="sendComplaintBtn_Click"/>
+            </Grid>
+        </Border>
     </Grid>
 </Window>

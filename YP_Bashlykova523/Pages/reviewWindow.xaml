@@ -5,8 +5,48 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:YP_Bashlykova523.Pages"
         mc:Ignorable="d"
-        Title="reviewWindow" Height="450" Width="800">
+        Background="#D2E2EC"
+        Title="Написать отзыв" MinHeight="500" MinWidth="650"
+        Height="500" Width="750">
+    
     <Grid>
-        
+        <Border BorderBrush="#3A2119" BorderThickness="2" CornerRadius="10" Background="#D9CBC2" HorizontalAlignment="Stretch" VerticalAlignment="Center" MaxWidth="600" MaxHeight="430">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="70"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="Отзыв о книге" Style="{StaticResource HeaderText}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,30,0,0" Grid.Row="0"/>
+
+                <StackPanel Grid.Row="1" Orientation="Vertical" Margin="30">
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,15">
+                        <TextBlock Text="Пользователь:" FontSize="17" FontWeight="Bold"/>
+                        <TextBlock x:Name="userFullNameTBl" Text="user" Margin="10,1,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,15">
+                        <TextBlock Text="Книга:" FontSize="17" FontWeight="Bold"/>
+                        <TextBlock x:Name="bookTitleTBl" Text="book" Margin="10,1,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,25">
+                        <TextBlock Text="Оценка:" FontSize="17" FontWeight="Bold" Margin="0,18,0,0"/>
+                        <ComboBox x:Name="ratingCB" Width="50" Margin="10,10,0,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                        <TextBlock Text=" / 10" Margin="5,0,0,8" VerticalAlignment="Bottom"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
+                        <TextBlock Text="Комментарий:" FontSize="17" FontWeight="Bold"/>
+                        <TextBlock Text="до 1000 симв." FontSize="11" Margin="10,0,0,0" VerticalAlignment="Top"/>
+                    </StackPanel>
+
+                    <TextBox x:Name="reviewCommentTB" Height="60" MaxHeight="150" TextWrapping="Wrap" AcceptsReturn="True"/>
+                </StackPanel>
+
+                <Button x:Name="saveReviewBtn" Grid.Row="2" Content="Опубликовать отзыв" Height="45" Background="#1B6C7E" Margin="0,0,0,25" Click="saveReviewBtn_Click"/>
+            </Grid>
+        </Border>
     </Grid>
 </Window>

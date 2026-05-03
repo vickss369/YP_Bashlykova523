@@ -20,9 +20,11 @@ namespace YP_Bashlykova523.Pages
     /// </summary>
     public partial class readingBookPage : Page
     {
-        public readingBookPage()
+        private Book currentBook;
+        public readingBookPage(Book b)
         {
             InitializeComponent();
+            currentBook = b;
         }
     }
 }

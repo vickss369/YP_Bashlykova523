@@ -5,10 +5,40 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:YP_Bashlykova523.Pages"
       mc:Ignorable="d" 
+      Background="#D2E2EC"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="enterPage">
 
     <Grid>
-        
+        <Border BorderBrush="#3A2119" BorderThickness="2" MaxWidth="550" CornerRadius="10" Background="#D9CBC2" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+            <StackPanel Margin="45,25">
+                <TextBlock x:Name="modeTitle" Text="ВХОД" Style="{StaticResource HeaderText}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,15,0,20"/>
+
+                <StackPanel Orientation="Vertical">
+                    <TextBlock x:Name="fullNameTBl" Text="ФИО:"/>
+                    <TextBox x:Name="fullNameTB"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Vertical">
+                    <TextBlock x:Name="loginTBl" Text="Логин:"/>
+                    <TextBox x:Name="loginTB"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Vertical">
+                    <TextBlock x:Name="passwordTBl" Text="Пароль:"/>
+                    <PasswordBox x:Name="passwordPB" Height="30" FontSize="15" Foreground="#3A2119" FontFamily="Garamond" Margin="0,2,0,20"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Vertical">
+                    <TextBlock x:Name="emailTBl" Text="E-mail:" Visibility="Collapsed"/>
+                    <TextBox x:Name="emailTB" Text="aaa" Visibility="Collapsed"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Vertical" Margin="0,7,0,0">
+                    <Button x:Name="entrBtn" Content="Войти" Height="45" Background="#1B6C7E" Click="entrBtn_Click"/>
+                    <TextBlock x:Name="switchModeTBl" Text="Ещё нет аккаунта? Зарегистрироваться" FontSize="14" HorizontalAlignment="Center" TextDecorations="Underline" Cursor="Hand" MouseLeftButtonDown="SwitchMode_MouseLeftButtonDown" MouseEnter="SwitchMode_Hover" MouseLeave="SwitchMode_Hover"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
     </Grid>
 </Page>

@@ -5,8 +5,43 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:YP_Bashlykova523.Pages"
         mc:Ignorable="d"
-        Title="applicationWindow" Height="450" Width="800">
+        Background="#D2E2EC"
+        Title="Подать заявку" MinHeight="500" MinWidth="650"
+        Height="500" Width="750">
+
     <Grid>
-        
+        <Border BorderBrush="#3A2119" BorderThickness="2" CornerRadius="10" Background="#D9CBC2" HorizontalAlignment="Stretch" VerticalAlignment="Center" MaxWidth="600" MaxHeight="410">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="70"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="Подача заявки" Style="{StaticResource HeaderText}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,30,0,0" Grid.Row="0"/>
+
+                <StackPanel Grid.Row="1" Orientation="Vertical" Margin="30">
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
+                        <TextBlock Text="Пользователь:" FontSize="17" FontWeight="Bold"/>
+                        <TextBlock x:Name="userFullNameTBl" Margin="10,1,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
+                        <TextBlock Text="Цель:" FontSize="17" FontWeight="Bold" Margin="0,8,0,0"/>
+                        <ComboBox x:Name="purposeCB" Width="220" Margin="10,0,0,0" DisplayMemberPath="Name"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                        <TextBlock Text="Сообщение:" FontSize="17" FontWeight="Bold"/>
+                        <TextBlock Text="до 300 симв." FontSize="11" Margin="10,0,0,0"/>
+                    </StackPanel>
+
+                    <TextBox x:Name="messageTB" Height="50" MaxHeight="150" TextWrapping="Wrap" AcceptsReturn="True"/>
+
+                </StackPanel>
+
+                <Button x:Name="sendApplicationBtn" Grid.Row="2" Content="Отправить заявку" Height="45" Background="#989876" Margin="0,0,0,25" Click="sendApplicationBtn_Click"/>
+            </Grid>
+        </Border>
     </Grid>
 </Window>
