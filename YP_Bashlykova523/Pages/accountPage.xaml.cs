@@ -43,22 +43,12 @@ namespace YP_Bashlykova523.Pages
 
             reviewsList.ItemsSource = Core.Context.Review.Where(r => r.UserID == user.ID).ToList();
 
-            freezePanel.Visibility = user.IsFreeze ? Visibility.Visible : Visibility.Collapsed;
+            if (user.IsFreeze) toBeAuthorPanel.Visibility = Visibility.Collapsed;
 
             if (user.RoleID == 1)
                 toBeAuthorPanel.Visibility = Visibility.Visible;
             else
                 toBeAuthorPanel.Visibility = Visibility.Collapsed;
-        }
-
-        private void backBtn_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.GoBack();
-        }
-
-        private void applicationBtn_Click(object sender, RoutedEventArgs e)
-        {
-            new applicationWindow("Разморозка аккаунта").ShowDialog();
         }
 
         private void applicationAuthorBtn_Click(object sender, RoutedEventArgs e)

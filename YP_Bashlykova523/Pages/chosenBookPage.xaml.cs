@@ -43,10 +43,23 @@ namespace YP_Bashlykova523.Pages
 
         private void LoadSections()
         {
-            sectionCB.ItemsSource = Core.Context.Section.ToList();
+            var sections = Core.Context.Section.ToList();
 
-            var bookInRL = Core.Context.ReadingList.First(rl => rl.UserID == User.currentUser.ID && rl.BookID == currentBook.ID);
-            sectionCB.SelectedItem = bookInRL.Section;
+            if (User.currentUser == null)
+            {
+                sectionCB.ItemsSource = sections;
+                sectionCB.SelectedItem = null;
+                return;
+            }
+
+            var existing = Core.Context.ReadingList.FirstOrDefault(rl => rl.UserID == User.currentUser.ID && rl.BookID == currentBook.ID);
+            if (existing != null)
+            {
+                sections = sections.Where(s => s.ID != existing.SectionID).ToList();
+                sectionCB.SelectedItem = null;
+            }
+
+            sectionCB.ItemsSource = sections;
         }
 
         private void LoadExtraBookInfo()
@@ -69,7 +82,8 @@ namespace YP_Bashlykova523.Pages
                 MessageBox.Show("Вы не зарегистрированы.", "ВНИМАНИЕ", MessageBoxButton.OK, MessageBoxImage.Warning);
 
                 var main = Window.GetWindow(this) as MainWindow;
-                main.MainFrame.Content = new enterPage();
+                if (main != null)
+                    main.MainFrame.Content = new enterPage();
 
                 return false;
             }
@@ -102,25 +116,33 @@ namespace YP_Bashlykova523.Pages
             }
 
             Section section = sectionCB.SelectedItem as Section;
-            if (section == null) return;
-
-            bool exists = Core.Context.ReadingList.Any(rl => rl.UserID == User.currentUser.ID && rl.BookID == currentBook.ID);
-            if (exists)
+            if (section == null)
             {
-                MessageBox.Show("Книга уже есть в вашем списке.", "ВНИМАНИЕ", MessageBoxButton.OK, MessageBoxImage.Warning);
-                sectionCB.SelectedItem = null;
+                MessageBox.Show("Выберите секцию.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
-            ReadingList rl1 = new ReadingList() {
+            var existing = Core.Context.ReadingList.FirstOrDefault(rl => rl.UserID == User.currentUser.ID && rl.BookID == currentBook.ID);
+            if (existing != null)
+            {
+                existing.SectionID = section.ID;
+                Core.Context.SaveChanges();
+
+                MessageBox.Show("Секция обновлена.", "Успех!", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
+            ReadingList rl1 = new ReadingList
+            {
                 BookID = currentBook.ID,
                 UserID = User.currentUser.ID,
                 SectionID = section.ID
             };
+
             Core.Context.ReadingList.Add(rl1);
             Core.Context.SaveChanges();
 
-            MessageBox.Show("Добавлено в список");
+            MessageBox.Show("Добавлено в список.", "Успех!", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void complaintBookBtn_Click(object sender, RoutedEventArgs e)

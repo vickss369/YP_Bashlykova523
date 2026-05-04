@@ -21,10 +21,30 @@ namespace YP_Bashlykova523.Pages
     public partial class readingBookPage : Page
     {
         private Book currentBook;
+
         public readingBookPage(Book b)
         {
             InitializeComponent();
             currentBook = b;
+
+            LoadText();
+        }
+
+        private void LoadText()
+        {
+            FlowDocument doc = new FlowDocument();
+
+            Paragraph p = new Paragraph();
+            p.Inlines.Add(new Run(currentBook.FullText));
+
+            doc.Blocks.Add(p);
+
+            bookFullTextRTB.Document = doc;
+        }
+
+        private void backBtn_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.GoBack();
         }
     }
 }

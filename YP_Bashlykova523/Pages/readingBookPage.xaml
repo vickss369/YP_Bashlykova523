@@ -5,10 +5,22 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:YP_Bashlykova523.Pages"
       mc:Ignorable="d" 
+      Background="#D2E2EC"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="readingBookPage">
 
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="10,5,10,0">
+            <Button x:Name="backBtn" Content="←" Width="30" Height="30" Background="#D2685B" Click="backBtn_Click"/>
+        </StackPanel>
+
+        <Border Grid.Row="1" Margin="20,0,20,20" BorderBrush="#3A2119" BorderThickness="2" CornerRadius="10" Background="#E7D6CA" Padding="25">
+            <RichTextBox x:Name="bookFullTextRTB" FontSize="18" FontFamily="Garamond" Background="Transparent" BorderThickness="0" IsReadOnly="True" VerticalScrollBarVisibility="Auto"/>
+        </Border>
     </Grid>
 </Page>

@@ -29,15 +29,12 @@ namespace YP_Bashlykova523.Pages
             ContentFrame.Navigate(new bookCatalogPage());
         }
 
-        //тут мне ещё надо решить, какие роли что могут
-        // * может ли админ и автор читать и иметь рид-листы
-        // * все имеют доступ к профилю или только пользователь
-        // * автор и админ - те же читатели с тем же функционалом, только плюс доп возможности?
         private void UpdateUI()
         {
             adminBtn.Visibility = Visibility.Collapsed;
             authorBtn.Visibility = Visibility.Collapsed;
             profileBtn.Visibility = Visibility.Collapsed;
+            bookListsBtn.Visibility = Visibility.Collapsed;
 
             logoutBtn.Visibility = Visibility.Collapsed;
             entrBtn.Visibility = Visibility.Visible;
@@ -57,10 +54,12 @@ namespace YP_Bashlykova523.Pages
             else if (User.currentUser.RoleID == 2)
             {
                 authorBtn.Visibility = Visibility.Visible;
+                bookListsBtn.Visibility = Visibility.Visible;
             }
             else
             {
                 adminBtn.Visibility = Visibility.Visible;
+                bookListsBtn.Visibility = Visibility.Visible;
             }
 
             if (User.currentUser.IsFreeze)
@@ -91,9 +90,9 @@ namespace YP_Bashlykova523.Pages
 
         private void profileBtn_Click(object sender, RoutedEventArgs e)
         {
-            //ContentFrame.Navigate(new accountPage());
+            ContentFrame.Navigate(new accountPage());
 
-            NavigationService.Navigate(new accountPage());
+            //NavigationService.Navigate(new accountPage());
         }
 
         private void entrBtn_Click(object sender, RoutedEventArgs e)

@@ -111,19 +111,5 @@ namespace YP_Bashlykova523.Pages
             selectedBook = book;
             NavigationService.Navigate(new chosenBookPage(selectedBook));
         }
-
-        /*private void toBookDetailBtn_Click(object sender, RoutedEventArgs e)
-        {
-            var btn = sender as Button;
-            if (btn == null) return;
-
-            var book = btn.DataContext as Book;
-            if (book == null) return;
-
-            selectedBook = book;
-
-            var main = Window.GetWindow(this) as MainWindow;
-            main.MainFrame.Content = new chosenBookPage(selectedBook);
-        }*/
     }
 }
