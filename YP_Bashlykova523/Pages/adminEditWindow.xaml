@@ -5,8 +5,44 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:YP_Bashlykova523.Pages"
         mc:Ignorable="d"
-        Title="adminEditWindow" Height="450" Width="800">
+        Background="#D2E2EC"
+        Title="Редактирование" MinHeight="450" MinWidth="700"
+        Height="500" Width="750">
+
     <Grid>
-        
+        <Border BorderBrush="#3A2119" BorderThickness="2" CornerRadius="10" Background="#D9CBC2" HorizontalAlignment="Stretch" VerticalAlignment="Center" MaxWidth="600" MaxHeight="440">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="75"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock x:Name="titleTBl" Text="Редактирование" Style="{StaticResource HeaderText}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0"/>
+
+                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                    <StackPanel Margin="25">
+                        <TextBlock x:Name="usernameTBl" Text="ФИО пользователя"/>
+                        <TextBox x:Name="usernameTB" Margin="0,0,0,17"/>
+
+                        <TextBlock x:Name="roleTBl" Text="Роль"/>
+                        <ComboBox x:Name="roleCB" Margin="0,0,0,17" DisplayMemberPath="Name" SelectedValuePath="ID"/>
+
+                        <TextBlock x:Name="emailTBl" Text="E-mail"/>
+                        <TextBox x:Name="emailTB" Margin="0,0,0,17"/>
+
+                        <CheckBox x:Name="isFreezeChB" Content="Заморожен" Margin="0,5,0,17"/>
+
+                        <TextBlock x:Name="loginTBl" Text="Логин"/>
+                        <TextBox x:Name="loginTB" Margin="0,0,0,15"/>
+
+                        <TextBlock x:Name="passwordTBl" Text="Пароль"/>
+                        <TextBox x:Name="passwordTB" Margin="0,0,0,0"/>
+                    </StackPanel>
+                </ScrollViewer>
+
+                <Button x:Name="saveBtn" Content="Сохранить" Height="45" Background="#1B6C7E" Margin="5" Grid.Row="2" Click="saveBtn_Click"/>
+            </Grid>
+        </Border>
     </Grid>
 </Window>

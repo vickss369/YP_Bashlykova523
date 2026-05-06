@@ -86,7 +86,7 @@ namespace YP_Bashlykova523.Pages
             Core.Context.Application.Add(app);
             Core.Context.SaveChanges();
 
-            MessageBox.Show("Заявка отправлена");
+            MessageBox.Show("Заявка успешно отправлена!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
             Close();
         }
     }

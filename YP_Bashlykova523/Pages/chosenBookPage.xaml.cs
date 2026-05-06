@@ -79,7 +79,7 @@ namespace YP_Bashlykova523.Pages
         {
             if (User.currentUser == null)
             {
-                MessageBox.Show("Вы не зарегистрированы.", "ВНИМАНИЕ", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Вы не авторизованы.", "ВНИМАНИЕ", MessageBoxButton.OK, MessageBoxImage.Warning);
 
                 var main = Window.GetWindow(this) as MainWindow;
                 if (main != null)

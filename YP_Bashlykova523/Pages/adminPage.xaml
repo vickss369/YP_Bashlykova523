@@ -5,10 +5,161 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:YP_Bashlykova523.Pages"
       mc:Ignorable="d" 
+      Background="#D2E2EC"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="adminPage">
 
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,30,0,0">
+            <Button x:Name="usersListBtn" Content="Пользователи" Width="140" Height="35" Margin="6" Background="#B4A3D7" Style="{x:Null}" Click="usersListBtn_Click"/>
+            <Button x:Name="complaintsBtn" Content="Жалобы" Width="110" Height="35" Margin="6" Background="#D4A5BB" Style="{x:Null}" Click="complaintsBtn_Click"/>
+            <Button x:Name="applicationsBtn" Content="Заявки" Width="100" Height="35" Margin="6" Background="#DDBBA7" Style="{x:Null}" Click="applicationsBtn_Click"/>
+            <Button x:Name="frozenBooksBtn" Content="Заморозки" Width="110" Height="35" Margin="6" Background="#60A1AF" Style="{x:Null}" Click="frozenBooksBtn_Click"/>
+        </StackPanel>
+
+        <Grid Grid.Row="1" Margin="0,15,0,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel HorizontalAlignment="Center">
+                <TextBlock x:Name="titleTBl" Text="Список пользователей" Foreground="#3A2119" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" Margin="30,10,0,0"/>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <ComboBox x:Name="applicationFilterCB" Width="200" Margin="10" DisplayMemberPath="Name" Visibility="Collapsed" SelectionChanged="applicationFilterCB_SelectionChanged"/>
+                    
+                    <ComboBox x:Name="complaintFilterCB" Width="200" Margin="10" Visibility="Collapsed" SelectionChanged="complaintFilterCB_SelectionChanged">
+                        <ComboBoxItem Content="Все"/>
+                        <ComboBoxItem Content="На книги"/>
+                        <ComboBoxItem Content="На авторов"/>
+                        <ComboBoxItem Content="На отзывы"/>
+                    </ComboBox>
+                </StackPanel>
+            </StackPanel>
+
+            <Button x:Name="addUserBtn" Content="Добавить" Width="110" Height="40" Background="#98C077" Foreground="#3A2119" Margin="0,0,30,0" VerticalAlignment="Center" Grid.Column="1" Click="addUserBtn_Click"/>
+        </Grid>
+
+        <ListBox x:Name="usersList" Grid.Row="2" Margin="15,10,15,15" Background="#D2E2EC" BorderThickness="0" HorizontalContentAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Visibility="Visible" d:ItemsSource="{d:SampleData ItemCount=5}">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel IsItemsHost="True"/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border MinWidth="350" MaxWidth="450" Margin="10" Padding="10" BorderBrush="#3A2119" BorderThickness="2" Background="{Binding CardColor}" CornerRadius="12">
+                        <Grid>
+                            <StackPanel Margin="15,10,100,10">
+                                <TextBlock Text="{Binding FullName}" FontSize="17" FontWeight="Bold"/>
+                                <TextBlock Text="{Binding Role.Name}" FontSize="15"/>
+                                <TextBlock Text="{Binding Email}" FontSize="15"/>
+                                <TextBlock Text="{Binding Login, StringFormat=Логин: {0}}" FontSize="14" Margin="0,7,0,0"/>
+                                <TextBlock Text="{Binding Password, StringFormat=Пароль: {0}}" FontSize="14"/>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,10,10,0">
+                                <Button Content="✎" Width="35" Height="35" Style="{x:Null}" Background="#8BA2C1" Margin="0,0,5,0" Click="editUserBtn_Click"/>
+                                <Button Content="✗" Width="35" Height="35" Style="{x:Null}" Background="#CB8176" Click="delUserBtn_Click"/>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <ListBox x:Name="complaintsList" Grid.Row="2" Margin="15,10,15,15" Background="#D2E2EC" BorderThickness="0" HorizontalContentAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Visibility="Collapsed" d:ItemsSource="{d:SampleData ItemCount=5}">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel IsItemsHost="True"/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border MinWidth="350" MaxWidth="450" Margin="10" Padding="10" BorderBrush="#3A2119" BorderThickness="2" Background="#CFAFBF" CornerRadius="12">
+                        <Grid>
+                            <StackPanel Margin="15,10,100,10">
+                                <TextBlock Text="{Binding User.FullName}" FontSize="17" FontWeight="Bold"/>
+                                <TextBlock Text="{Binding TargetText}" FontWeight="SemiBold" Margin="0,5,0,3"/>
+                                <TextBlock Text="{Binding Reason}" FontSize="15" TextWrapping="Wrap"/>
+                                <TextBlock Text="{Binding CreateDate, StringFormat=Дата: {0:dd.MM.yyyy HH:mm}}" FontSize="14" Margin="0,7,0,0"/>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,10,10,0">
+                                <Button Content="✓" Width="35" Height="35" Style="{x:Null}" Background="#BFD397" Margin="0,0,5,0" Click="actionAcceptBtn_Click"/>
+                                <Button Content="✗" Width="35" Height="35" Style="{x:Null}" Background="#CB8176" Click="actionRejectBtn_Click"/>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <ListBox x:Name="applicationsList" Grid.Row="2" Margin="15,10,15,15" Background="#D2E2EC" BorderThickness="0" HorizontalContentAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Visibility="Collapsed" d:ItemsSource="{d:SampleData ItemCount=5}">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel IsItemsHost="True"/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border MinWidth="350" MaxWidth="450" Margin="10" Padding="10" BorderBrush="#3A2119" BorderThickness="2" Background="#F0D0BC" CornerRadius="12">
+                        <Grid>
+                            <StackPanel Margin="15,10,100,10">
+                                <TextBlock Text="{Binding User.FullName}" FontSize="17" FontWeight="Bold"/>
+                                <TextBlock Text="{Binding Message}" FontSize="15" TextWrapping="Wrap"/>
+                                <TextBlock Text="{Binding CreateDate, StringFormat=Дата: {0:dd.MM.yyyy HH:mm}}" FontSize="14" Margin="0,7,0,0"/>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,10,10,0">
+                                <Button Content="✓" Width="35" Height="35" Style="{x:Null}" Background="#BFD397" Margin="0,0,5,0" Click="actionAcceptBtn_Click"/>
+                                <Button Content="✗" Width="35" Height="35" Style="{x:Null}" Background="#CB8176" Click="actionRejectBtn_Click"/>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <ListBox x:Name="frozenBooksList" Grid.Row="2" Margin="15,10,15,15" Background="#D2E2EC" BorderThickness="0" HorizontalContentAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Visibility="Collapsed" d:ItemsSource="{d:SampleData ItemCount=5}">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel IsItemsHost="True"/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border MinWidth="350" MaxWidth="450" Margin="10" Padding="10" BorderBrush="#3A2119" BorderThickness="2" Background="#BCD2E7" CornerRadius="12">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="90"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Source="{Binding ImagePath}" Width="90" Height="90" Grid.Column="0" Stretch="UniformToFill"/>
+                            <StackPanel Grid.Column="1" Margin="10,10,10,0">
+                                <TextBlock Text="{Binding Title}" FontSize="17" FontWeight="Bold" TextWrapping="Wrap"/>
+                                <TextBlock Text="Автор:" FontSize="15" Margin="0,10,0,0"/>
+                                <TextBlock Text="{Binding User.FullName}" FontSize="14" Grid.ColumnSpan="2"/>
+                            </StackPanel>
+
+                            <Button Content="Разморозить" Width="100" Height="35" Grid.Column="2" VerticalAlignment="Top" Margin="0,5,5,0" Background="#85A9C7" Style="{x:Null}" Click="unfreezeBookBtn_Click"/>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </Page>

@@ -1,7 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <Style TargetType="Button">
+    <Style TargetType="Button" BasedOn="{x:Null}">
         <Setter Property="FontSize" Value="18"/>
         <Setter Property="FontFamily" Value="Garamond"/>
         <Setter Property="Foreground" Value="#3A2119"/>
