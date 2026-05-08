@@ -5,8 +5,69 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:YP_Bashlykova523.Pages"
         mc:Ignorable="d"
-        Title="authorEditWindow" Height="450" Width="800">
+        Background="#D2E2EC"
+        Title="Редактирование" MinHeight="500" MinWidth="750"
+        Height="550" Width="800">
+
     <Grid>
-        
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Border BorderBrush="#3A2119" BorderThickness="2" CornerRadius="10" Background="#D9CBC2" HorizontalAlignment="Stretch" MaxWidth="750" MaxHeight="650">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="70"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="75"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock x:Name="titleTBl" Text="Редактирование книги" Style="{StaticResource HeaderText}" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,15,0,0"/>
+
+                    <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                        <StackPanel Margin="25">
+                            <TextBlock Text="Название"/>
+                            <TextBox x:Name="bookTitleTB" Margin="0,0,0,17"/>
+
+                            <TextBlock Text="Ссылка на обложку"/>
+                            <TextBox x:Name="imagePathTB" Margin="0,0,0,17"/>
+
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Аннотация" Margin="0,5,0,0"/>
+                                <TextBlock Text="до 4000 симв." FontSize="12" Margin="6,2,0,0"/>
+                            </StackPanel>
+
+                            <TextBox x:Name="annotationTB" MinHeight="80" MaxHeight="130" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" Margin="0,0,0,17"/>
+
+                            <StackPanel Orientation="Horizontal" Margin="0,17,0,5">
+                                <TextBlock Text="Жанры:" Margin="0,0,0,5"/>
+                                <TextBlock x:Name="selectedGenresTBl" Text="не выбрано" Margin="8,0,0,0"/>
+                            </StackPanel>
+
+                            <ListBox x:Name="genresList" BorderThickness="0" Background="#D9CBC2" HorizontalContentAlignment="Stretch" MaxHeight="120" d:ItemsSource="{d:SampleData ItemCount=5}">
+                                <ListBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel IsItemsHost="True"/>
+                                    </ItemsPanelTemplate>
+                                </ListBox.ItemsPanel>
+
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <CheckBox x:Name="genreChB" Content="{Binding Name}" Checked="genreChB_Checked" Unchecked="genreChB_Checked" Loaded="genreChB_Loaded"/>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+
+                            <StackPanel Orientation="Horizontal" Margin="0,17,0,0">
+                                <TextBlock Text="Полный текст" Margin="0,5,0,0"/>
+                                <TextBlock Text="до 4000 симв." FontSize="12" Margin="6,2,0,0"/>
+                            </StackPanel>
+
+                            <TextBox x:Name="fullTextTB" MinHeight="120" MaxHeight="260" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" Margin="0,0,0,17"/>
+
+                        </StackPanel>
+                    </ScrollViewer>
+
+                    <Button x:Name="saveBtn" Content="Сохранить" Height="45" Background="#1B6C7E" Margin="5" Grid.Row="2" Click="saveBtn_Click"/>
+                </Grid>
+            </Border>
+        </Grid>
     </Grid>
 </Window>

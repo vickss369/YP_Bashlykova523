@@ -44,7 +44,7 @@
                 </StackPanel>
             </StackPanel>
 
-            <Button x:Name="addUserBtn" Content="Добавить" Width="110" Height="40" Background="#98C077" Foreground="#3A2119" Margin="0,0,30,0" VerticalAlignment="Center" Grid.Column="1" Click="addUserBtn_Click"/>
+            <Button x:Name="addUserBtn" Content="Добавить" Background="#98C077" Margin="0,0,30,0" VerticalAlignment="Center" Grid.Column="1" Click="addUserBtn_Click"/>
         </Grid>
 
         <ListBox x:Name="usersList" Grid.Row="2" Margin="15,10,15,15" Background="#D2E2EC" BorderThickness="0" HorizontalContentAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Visibility="Visible" d:ItemsSource="{d:SampleData ItemCount=5}">

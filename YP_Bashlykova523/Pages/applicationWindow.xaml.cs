@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -21,10 +22,20 @@ namespace YP_Bashlykova523.Pages
     public partial class applicationWindow : Window
     {
         private string applicationPurpose;
-        public applicationWindow(string ap)
+        private int? bookID = null;
+        public applicationWindow(string ap) //если на пользователя
         {
             InitializeComponent();
             applicationPurpose = ap;
+
+            LoadData();
+        }
+
+        public applicationWindow(string ap, int bookid) //если заявка на книгу
+        {
+            InitializeComponent();
+            applicationPurpose = ap;
+            bookID = bookid;
 
             LoadData();
         }
@@ -37,11 +48,15 @@ namespace YP_Bashlykova523.Pages
             purposeCB.ItemsSource = purposes;
 
             if (!string.IsNullOrEmpty(applicationPurpose))
+                purposeCB.SelectedItem = purposes.FirstOrDefault(p => p.Name == applicationPurpose);
+
+            if (bookID != null)
             {
-                var selected = purposes.FirstOrDefault(p => p.Name == applicationPurpose);
-                if (selected != null)
+                var book = Core.Context.Book.FirstOrDefault(b => b.ID == bookID);
+                if (book != null)
                 {
-                    purposeCB.SelectedItem = selected;
+                    bookPanel.Visibility = Visibility.Visible;
+                    bookTBl.Text = book.Title;
                 }
             }
         }
@@ -68,20 +83,24 @@ namespace YP_Bashlykova523.Pages
 
             var selectedPurpose = purposeCB.SelectedItem as ApplicationPurpose;
 
-            bool alreadyExists = Core.Context.Application.Any(a => a.UserID == User.currentUser.ID && a.PurposeID == selectedPurpose.ID && a.StatusID == 1);
+            bool alreadyExists = Core.Context.Application.Any(a => a.UserID == User.currentUser.ID 
+                                 && a.PurposeID == selectedPurpose.ID && a.StatusID == 1 
+                                 && a.BookID == bookID);
+
             if (alreadyExists)
             {
                 MessageBox.Show("У вас уже есть заявка на рассмотрении.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
-            Application app = new Application() {
+            Application app = new Application()
+            {
                 UserID = User.currentUser.ID,
                 PurposeID = selectedPurpose.ID,
                 Message = messageTB.Text,
                 CreateDate = DateTime.Now,
                 StatusID = 1,
-                BookID = null
+                BookID = bookID
             };
             Core.Context.Application.Add(app);
             Core.Context.SaveChanges();

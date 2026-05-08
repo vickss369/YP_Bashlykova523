@@ -237,17 +237,17 @@ namespace YP_Bashlykova523.Pages
                     if (review != null)
                         Core.Context.Review.Remove(review);
                 }
+                else if (complaint.BookID != null && complaint.Reason.StartsWith("[Жалоба на автора]"))
+                {
+                    var user = Core.Context.User.FirstOrDefault(u => u.ID == complaint.UserID);
+                    if (user != null)
+                        user.IsFreeze = true;
+                }
                 else if (complaint.BookID != null)
                 {
                     var book = Core.Context.Book.FirstOrDefault(b => b.ID == complaint.BookID);
                     if (book != null)
                         book.IsFreeze = true;
-                }
-                else if (complaint.Reason.StartsWith("[Жалоба на автора]\n"))
-                {
-                    var user = Core.Context.User.FirstOrDefault(u => u.ID == complaint.UserID);
-                    if (user != null)
-                        user.IsFreeze = true;
                 }
 
                 Core.Context.Complaint.Remove(complaint);
@@ -260,21 +260,21 @@ namespace YP_Bashlykova523.Pages
             {
                 var app = Core.Context.Application.FirstOrDefault(a => a.ID == id);
 
-                if (app.ApplicationPurpose.Name == "Становление автором")
+                if (app.ApplicationPurpose?.Name == "Становление автором")
                 {
                     var user = Core.Context.User.FirstOrDefault(u => u.ID == app.UserID);
                     if (user != null)
                         user.RoleID = 2;
                 }
 
-                if (app.ApplicationPurpose.Name == "Разморозка книги")
+                if (app.ApplicationPurpose?.Name == "Разморозка книги")
                 {
                     var book = Core.Context.Book.FirstOrDefault(b => b.ID == app.BookID);
                     if (book != null)
                         book.IsFreeze = false;
                 }
 
-                if (app.ApplicationPurpose.Name == "Разморозка аккаунта")
+                if (app.ApplicationPurpose?.Name == "Разморозка аккаунта")
                 {
                     var user = Core.Context.User.FirstOrDefault(u => u.ID == app.UserID);
                     if (user != null)

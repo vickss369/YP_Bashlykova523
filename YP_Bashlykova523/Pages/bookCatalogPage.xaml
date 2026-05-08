@@ -62,10 +62,6 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Border Width="280" Height="470" Margin="12" Padding="12" CornerRadius="12" Background="#f5d4bd" BorderBrush="#3A2119" BorderThickness="1">
-                        <Border.Effect>
-                            <DropShadowEffect BlurRadius="12" ShadowDepth="3" Opacity="0.2"/>
-                        </Border.Effect>
-
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="300"/>

@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:YP_Bashlykova523.Pages"
         mc:Ignorable="d"
         Background="#D2E2EC"
-        Title="Редактирование" MinHeight="450" MinWidth="700"
-        Height="500" Width="750">
+        Title="Редактирование" MinHeight="500" MinWidth="700"
+        Height="550" Width="750">
 
     <Grid>
         <Border BorderBrush="#3A2119" BorderThickness="2" CornerRadius="10" Background="#D9CBC2" HorizontalAlignment="Stretch" VerticalAlignment="Center" MaxWidth="600" MaxHeight="440">

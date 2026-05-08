@@ -91,8 +91,6 @@ namespace YP_Bashlykova523.Pages
         private void profileBtn_Click(object sender, RoutedEventArgs e)
         {
             ContentFrame.Navigate(new accountPage());
-
-            //NavigationService.Navigate(new accountPage());
         }
 
         private void entrBtn_Click(object sender, RoutedEventArgs e)

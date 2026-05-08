@@ -5,10 +5,67 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:YP_Bashlykova523.Pages"
       mc:Ignorable="d" 
+      Background="#D2E2EC"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="authorPage">
 
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid HorizontalAlignment="Center" Margin="0,20,0,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock x:Name="titleTBl" Text="Мои книги" FontSize="21" FontWeight="Bold" VerticalAlignment="Center"/>
+
+            <ComboBox x:Name="frozenBooksCB" Grid.Column="1" Margin="20,0" SelectionChanged="frozenBooksCB_SelectionChanged">
+                <ComboBoxItem Content="Все"/>
+                <ComboBoxItem Content="Только замороженные"/>
+            </ComboBox>
+
+            <Button x:Name="addBookBtn" Content="Добавить" Background="#98C077" Margin="20,0,0,0" Grid.Column="2" Click="addBookBtn_Click"/>
+        </Grid>
+
+        <ListBox x:Name="authorBooksList" Grid.Row="1" Margin="15,10,15,15" Background="#D2E2EC" BorderThickness="0" HorizontalContentAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled" d:ItemsSource="{d:SampleData ItemCount=5}">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel IsItemsHost="True"/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border MinWidth="350" MaxWidth="450" Margin="10" Padding="10" BorderBrush="#3A2119" BorderThickness="2" Background="{Binding CardColor}" CornerRadius="12">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Source="{Binding ImagePath}" Width="90" Height="110" Grid.Column="0"/>
+                            
+                            <StackPanel Grid.Column="1" Margin="10,5,10,5">
+                                <TextBlock Text="{Binding Title}" FontSize="17" FontWeight="Bold" TextWrapping="Wrap"/>
+                                <TextBlock Text="Аннотация:" FontSize="15" Margin="0,8,0,0"/>
+                                <TextBlock Text="{Binding Annotation}" FontSize="14" TextWrapping="Wrap" MaxHeight="80" Grid.ColumnSpan="2"  TextTrimming="CharacterEllipsis"/>
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Top" Margin="0,5,5,0">
+                                <Button x:Name="editBookBtn" Content="✎" Width="35" Height="35" Style="{x:Null}" Background="#8BA2C1" Margin="0,0,5,0" Visibility="{Binding EditVisible}" Click="editBookBtn_Click"/>
+                                <Button x:Name="delBookBtn" Content="✗" Width="35" Height="35" Style="{x:Null}" Background="#CB8176" Visibility="{Binding EditVisible}" Click="delBookBtn_Click"/>
+                                <Button x:Name="requestUnfreezeBookBtn" Content="Разморозить" Width="100" Height="35" Style="{x:Null}" Margin="0,0,5,0" Background="#85A9C7" Visibility="{Binding RequestVisible}" Click="requestUnfreezeBtn_Click"/>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </Page>

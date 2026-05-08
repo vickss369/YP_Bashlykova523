@@ -33,8 +33,8 @@ namespace YP_Bashlykova523.Pages
             this.mode = mode;
             this.id = id;
 
-            LoadComboBox();
             LoadData();
+            roleCB.ItemsSource = Core.Context.Role.ToList();
         }
 
         private void LoadData()
@@ -59,13 +59,6 @@ namespace YP_Bashlykova523.Pages
             {
                 titleTBl.Text = "Добавление пользователя";
             }
-        }
-
-        private void LoadComboBox()
-        {
-            roleCB.ItemsSource = Core.Context.Role.ToList();
-/*            roleCB.DisplayMemberPath = "Name";
-            roleCB.SelectedValuePath = "ID";*/
         }
 
         private void saveBtn_Click(object sender, RoutedEventArgs e)

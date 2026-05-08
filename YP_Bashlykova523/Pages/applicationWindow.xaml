@@ -31,6 +31,11 @@
                         <ComboBox x:Name="purposeCB" Width="220" Margin="10,0,0,0" DisplayMemberPath="Name"/>
                     </StackPanel>
 
+                    <StackPanel x:Name="bookPanel" Orientation="Horizontal" Margin="0,0,0,20" Visibility="Collapsed">
+                        <TextBlock Text="Книга:" FontSize="17" FontWeight="Bold"/>
+                        <TextBlock x:Name="bookTBl" Margin="10,1,0,0"/>
+                    </StackPanel>
+
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
                         <TextBlock Text="Сообщение:" FontSize="17" FontWeight="Bold"/>
                         <TextBlock Text="до 300 симв." FontSize="11" Margin="10,0,0,0"/>
