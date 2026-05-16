@@ -91,9 +91,23 @@ namespace YP_Bashlykova523.Pages
             return true;
         }
 
+        private bool CheckFrozenBook(Book book)
+        {
+            if (book == null) return false;
+
+            if (book.IsFreeze)
+            {
+                MessageBox.Show("Книга заморожена.\nВы не можете совершать с ней какие-либо действия.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+
+            return true;
+        }
+
         private void readBookBtn_Click(object sender, RoutedEventArgs e)
         {
             if (!CheckUser()) return;
+            if (!CheckFrozenBook(currentBook)) return;
 
             if (User.currentUser.IsFreeze)
             {
@@ -108,6 +122,7 @@ namespace YP_Bashlykova523.Pages
         private void addToListBtn_Click(object sender, RoutedEventArgs e)
         {
             if (!CheckUser()) return;
+            if (!CheckFrozenBook(currentBook)) return;
 
             if (User.currentUser.IsFreeze)
             {
@@ -148,6 +163,7 @@ namespace YP_Bashlykova523.Pages
         private void complaintBookBtn_Click(object sender, RoutedEventArgs e)
         {
             if (!CheckUser()) return;
+            if (!CheckFrozenBook(currentBook)) return;
 
             bool hasBook = Core.Context.ReadingList.Any(rl => rl.UserID == User.currentUser.ID && rl.BookID == currentBook.ID);
             if (!hasBook)
@@ -162,6 +178,7 @@ namespace YP_Bashlykova523.Pages
         private void complaintAuthorBtn_Click(object sender, RoutedEventArgs e)
         {
             if (!CheckUser()) return;
+            if (!CheckFrozenBook(currentBook)) return;
 
             bool hasBook = Core.Context.ReadingList.Any(rl => rl.UserID == User.currentUser.ID && rl.BookID == currentBook.ID);
             if (!hasBook)
@@ -176,6 +193,7 @@ namespace YP_Bashlykova523.Pages
         private void addReviewBtn_Click(object sender, RoutedEventArgs e)
         {
             if (!CheckUser()) return;
+            if (!CheckFrozenBook(currentBook)) return;
 
             bool hasBook = Core.Context.ReadingList.Any(rl => rl.UserID == User.currentUser.ID && rl.BookID == currentBook.ID);
             if (!hasBook)
@@ -199,6 +217,7 @@ namespace YP_Bashlykova523.Pages
         private void complaintReviewBtn_Click(object sender, RoutedEventArgs e)
         {
             if (!CheckUser()) return;
+            if (!CheckFrozenBook(currentBook)) return;
 
             Button btn = sender as Button;
             Review review = btn.DataContext as Review;
